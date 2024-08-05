@@ -26,14 +26,15 @@ const choice = {
 }
 
 function App() {
-  const [userSelect,setUserSelect] = useState(null)
-  const [computerSelect,setComputerSelect] = useState(null)
+  const [userSelect,setUserSelect] = useState(null);
+  const [computerSelect,setComputerSelect] = useState(null);
+  const [result,setResult] = useState(null);
 
   const play = (userChoice) => {
-    setUserSelect(choice[userChoice])
-    let computerChoice = randomChoice()
-    setComputerSelect(choice[computerChoice])
-    // console.log('선택됌', choice[userChoice])
+    setUserSelect(choice[userChoice]);
+    let computerChoice = randomChoice();
+    setComputerSelect(choice[computerChoice]);
+    setResult(judgement(choice[userChoice],choice[computerChoice]));
   }
 
   const randomChoice = () => {
@@ -42,28 +43,22 @@ function App() {
     return itemArray[randomItem]
   }
 
-  const whoWinner = (userChoice, computerChoice) => {
+  const judgement = (user, computer) => {
     let winner = ''
     //rock > scissors
     //scissors > paper
     //paper > rock
-    if(userChoice==computerChoice) { //비김
-
-    }else if(userChoice=='rock' & computerChoice=='scissors') { //user이김 : rock > scissors
-
-    }else if(userChoice=='scissors' & computerChoice=='paper') { //user이김 : scissors > paper
-      
-    }else if(userChoice=='paper' & computerChoice=='rock') { //user이김 : paper > rock
-    
-    }else { //computer 이김
-
-    }
+    if(user.name == computer.name) { //비김(Tie)
+      return "tie"
+    }else if(user.name=='Rock') return computer.name=='scissors'?'win':'lose' //user이김 : rock > scissors
+    else if(user.name=='Scissors') return computer.name=='paper'?'win':'lose' //user이김 : scissors > paper  
+    else if(user.name=='Paper') return computer.name=='rock'?'win':'lose' //user이김 : paper > rock
   }
   return (
     <div>
       <div className='box-area'>
-        <Box title='YOU' item={userSelect}/>
-        <Box title='COMPUTER' item={computerSelect}/>
+        <Box title='YOU' item={userSelect} result={result}/>
+        <Box title='COMPUTER' item={computerSelect} result={result}/>
       </div>
       <div className='button-area'>
         {/* <FontAwesomeIcon icon={faHandPeace} />
