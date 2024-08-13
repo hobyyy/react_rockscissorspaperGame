@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Box = (props) => {
-  // console.log('props', props)
+  console.log('props', props)
   let result;
-  if(props.title==='COMPUTER' && props.result!== 'tie' && props.result !=='') {
+  if(props.title==='COMPUTER' && props.result!== 'tie' && props?.result !=='') {
     result = props.result === 'win' ? 'lose' : 'win';
   }else {
     result = props.result;
   }
+  const [isWinner, setWinnerColor] = useState();
+  
   return (
-    <div className='box'>
+    <div className='box' style={{ backgroundColor: result==='win'?'green' : result==='lose' ? 'red' :'lightgray'}}>
       <h1>{props.title}</h1>
       <h2 data-testid="item-name">{props.item && props.item.name}</h2> 
       <img 
