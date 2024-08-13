@@ -8,8 +8,6 @@ const Box = (props) => {
   }else {
     result = props.result;
   }
-  const [isWinner, setWinnerColor] = useState();
-  
   return (
     <div className='box' style={{ backgroundColor: result==='win'?'green' : result==='lose' ? 'red' :'lightgray'}}>
       <h1>{props.title}</h1>
